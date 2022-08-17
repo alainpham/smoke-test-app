@@ -96,8 +96,8 @@ done
 
 ```
 docker login
-docker build -t smoke-test-app -f src/main/docker/Dockerfile.multiarch .
-docker tag smoke-test-app:latest alainpham/smoke-test-app:latest
+docker build -t smoke-test-app -f src/main/docker/Dockerfile.jvm .
+docker tag smoke-test-app:latest YOUR_REPO/smoke-test-app:latest
 ```
 
 ##Dealing with SSL/TLS
