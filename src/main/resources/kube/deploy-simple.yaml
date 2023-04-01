@@ -10,7 +10,6 @@ stringData:
     # Configuration file
     # key = value
     %dev.quarkus.http.port=8090
-    %dev.quarkus.http.host=0.0.0.0
     quarkus.live-reload.watched-resources=camel/routes.xml,camel-rest/rests.xml
 
     camel.context.name = smoke-test-app
@@ -24,14 +23,6 @@ stringData:
 
     quarkus.swagger-ui.always-include=true
 
-    quarkus.camel.metrics.enable-message-history=true
-
-    app.processing.failurerate.percentage=5
-    app.processing.exectimeavg.ms=30
-    app.processing.exectimestdev.ms=15
-
-    app.processing.cpuusage.percentage=90
-    app.processing.memusage.mb=100
 ---
 
 # Sample TLS certs (do not use this in prod)
@@ -54,7 +45,7 @@ metadata:
     group: "net.alainpham"
   name: "smoke-test-app"
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: "smoke-test-app"
@@ -67,8 +58,8 @@ spec:
     spec:
       containers:
       - name: smoke-test-app
-        image: "registry.work.lan/smoke-test-app:1.2"
-        imagePullPolicy: "IfNotPresent"
+        image: "alainpham/smoke-test-app:latest"
+        imagePullPolicy: "Always"
         env:
           - name: APPLICATION_NAME
             value: smoke-test-app
@@ -126,7 +117,7 @@ metadata:
     group: "net.alainpham"
   name: "smoke-test-app"
 spec:
-  # type: LoadBalancer
+  type: LoadBalancer
   ports:
   - name: "http"
     port: 8080
@@ -135,27 +126,3 @@ spec:
   selector:
     app: "smoke-test-app"
     group: "net.alainpham"
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: smoke-test-app
-  labels:
-    app: "smoke-test-app"
-    group: "net.alainpham"
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-spec:
-  rules:
-  - host: smoke-test-app.kube.loc
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: smoke-test-app
-            port:
-              number: 8080
----

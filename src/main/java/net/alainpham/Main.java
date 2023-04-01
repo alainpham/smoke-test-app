@@ -22,9 +22,8 @@ public class Main extends RouteBuilder {
 		// .apiProperty("api.version", "test")
 		// .dataFormatProperty("prettyPrint", "true");
         // ;
-
-
-        from("timer:test-from-java?period=1s").log("hello from java");
+		
+        from("timer:test-from-java?period=1s").routeId("hello-java").delay(1);
 
         
     }

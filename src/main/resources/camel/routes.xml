@@ -5,8 +5,10 @@
         <setHeader id="set-header-http-receiver" name="Content-Type">
             <constant>application/json</constant>
         </setHeader>
+        <process ref="processing"/>
+        <log message="executed ${body}"></log>
         <setBody id="set-body-http-receiver">
-            <constant>{"msg" : "HELLO"}</constant>
+            <simple>{"msg" : "HELLO generated in ${body} ms"}</simple>
         </setBody>
     </route>
 
@@ -18,6 +20,7 @@
         </unmarshal>
         <log message="${body}"/>
 
+
         <bean ref="viewUpdate" method="upsertData(${body}, person, state-table)"/>
         <bean ref="viewUpdate" method="appendData(${body}, person, log-table)"/>
 
@@ -28,6 +31,7 @@
 
     <route id="get-ping-route">
         <from uri="direct:get-ping"/>
+        <process ref="processing"/>
         <setBody>
             <constant>pong</constant>
         </setBody>
