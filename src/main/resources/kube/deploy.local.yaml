@@ -67,7 +67,7 @@ spec:
     spec:
       containers:
       - name: smoke-test-app
-        image: "registry.work.lan/smoke-test-app:1.2"
+        image: "registry.awon.lan/smoke-test-app:1.2.1"
         imagePullPolicy: "IfNotPresent"
         env:
           - name: APPLICATION_NAME
