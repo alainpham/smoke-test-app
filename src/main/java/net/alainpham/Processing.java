@@ -3,8 +3,8 @@ package net.alainpham;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 
 import com.martensigwart.fakeload.FakeLoad;
 import com.martensigwart.fakeload.FakeLoadExecutor;
