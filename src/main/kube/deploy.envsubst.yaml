@@ -62,7 +62,7 @@ metadata:
     app.kubernetes.io/version: "2.0.0"
   name: "smoke-test-app"
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app.kubernetes.io/name: "smoke-test-app"
