@@ -82,9 +82,9 @@ export kube_ingress_root_domain=kube.loc
 
 mvn clean package -DskipTests
 
-docker build -f src/main/docker/Dockerfile.multiarch -t smoke-test-app:2.0.0 .
-docker tag smoke-test-app:2.0.0 ${localregistry}/smoke-test-app:2.0.0
-docker push ${localregistry}/smoke-test-app:2.0.0
+docker build -f src/main/docker/Dockerfile.multiarch -t smoke-test-app:2.0.2 .
+docker tag smoke-test-app:2.0.2 ${localregistry}/smoke-test-app:2.0.2
+docker push ${localregistry}/smoke-test-app:2.0.2
 
 envsubst < src/main/kube/deploy.envsubst.yaml | kubectl delete -f -
 envsubst < src/main/kube/deploy.envsubst.yaml | kubectl apply -f -
