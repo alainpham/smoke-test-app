@@ -80,14 +80,16 @@ change to your registry and ingress root domain
 export localregistry=alainpham
 export kube_ingress_root_domain=kube.loc 
 
+export kube_ingress_root_domain=vrbx.duckdns.org
+
 mvn clean package -DskipTests
 
-docker build -f src/main/docker/Dockerfile.multiarch -t smoke-test-app:2.0.2 .
-docker tag smoke-test-app:2.0.2 ${localregistry}/smoke-test-app:2.0.2
-docker push ${localregistry}/smoke-test-app:2.0.2
+docker build -f src/main/docker/Dockerfile.multiarch -t smoke-test-app:2.0.3 .
+docker tag smoke-test-app:2.0.3 ${localregistry}/smoke-test-app:2.0.3
+docker push ${localregistry}/smoke-test-app:2.0.3
 
 envsubst < src/main/kube/deploy.envsubst.yaml | kubectl delete -f -
-envsubst < src/main/kube/deploy.envsubst.yaml | kubectl apply -f -
+envsubst < src/main/kube/deploy.envsubst.yaml | kubectl apply -n apps -f -
 
 ```
 

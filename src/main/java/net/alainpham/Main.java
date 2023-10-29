@@ -24,8 +24,8 @@ public class Main extends RouteBuilder {
 		// .dataFormatProperty("prettyPrint", "true");
         // ;
 		
-        from("timer:test-from-java?period=1s").routeId("hello-java").delay(1);
-
+/*         from("timer:test-from-java?period=1s").routeId("hello-java").delay(1);
+ */
         
     }
     
